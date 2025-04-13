@@ -66,17 +66,20 @@ export default function Hero() {
         <div className="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mr-0 lg:mt-0 lg:max-w-none lg:flex-none xl:ml-32">
           <div className="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none">
             <div className="relative rounded-xl shadow-2xl overflow-hidden">
+              <div className="w-[36rem] h-[26rem] bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl">
+                {/* Fallback gradient background */}
+              </div>
               <Image
                 src="/images/hero.webp"
                 alt="Digital business growth illustration"
-                width={1920}
-                height={1080}
+                fill
                 priority
-                className="w-[36rem] rounded-xl bg-gray-900/5 object-cover"
+                className="object-cover rounded-xl"
                 sizes="(min-width: 1024px) 36rem, (min-width: 640px) 100vw, 100vw"
-                style={{
-                  height: 'auto',
-                  maxHeight: '26rem',
+                onError={(e) => {
+                  // If image fails to load, gradient background will show
+                  const target = e.target as HTMLElement;
+                  target.style.display = 'none';
                 }}
               />
               {/* Overlay gradient */}
