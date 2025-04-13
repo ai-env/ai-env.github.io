@@ -5,21 +5,20 @@ export const NAV_ITEMS = [
   },
   {
     name: 'Hizmetler',
-    href: '/hizmetler',
+    href: '/#services',
   },
   {
     name: 'Hakkımızda',
-    href: '/hakkimizda',
+    href: '/#about',
   },
   {
     name: 'İletişim',
-    href: '/iletisim',
+    href: '/#contact',
   },
 ] as const;
 
 export const CONTACT_INFO = {
-  email: 'info@envai.com', // Update with actual email
-  phone: '+90 555 555 5555', // Update with actual phone
+  email: 'envai.team@gmail.com', // Update with actual email
 } as const;
 
 export const SERVICES = [
@@ -68,5 +67,20 @@ export const VALUE_PROPS = [
     title: 'Kişiselleştirilmiş',
     description: 'Her işletmeye özel, ihtiyaca yönelik stratejiler geliştiriyoruz.',
     icon: 'UserGroupIcon',
+  },
+  {
+    title: 'Hızlı Teslimat',
+    description: 'Projelerinizi en kısa sürede hayata geçiriyoruz.',
+    icon: 'RocketLaunchIcon',
+  },
+  {
+    title: 'Kaliteli',
+    description: 'Son teknolojileri kullanarak yüksek kalitede çözümler üretiyoruz.',
+    icon: 'SparklesIcon',
+  },
+  {
+    title: 'Profesyonel',
+    description: 'Uzman ekibimizle profesyonel hizmet ve destek sağlıyoruz.',
+    icon: 'AcademicCapIcon',
   },
 ] as const; 

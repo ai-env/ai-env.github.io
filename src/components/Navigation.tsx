@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { NAV_ITEMS } from '@/utils/constants';
@@ -10,6 +10,41 @@ import { NAV_ITEMS } from '@/utils/constants';
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setIsOpen(false);
+
+    // If it's a hash link and we're on the home page
+    if (href.includes('#') && (pathname === '/' || pathname === '')) {
+      const sectionId = href.split('#')[1];
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else if (href === '/') {
+      // If it's the home link
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      router.push(href);
+    } else {
+      // For other pages, use normal navigation
+      router.push(href);
+    }
+  };
+
+  // Handle initial hash navigation when page loads
+  useEffect(() => {
+    if (window.location.hash) {
+      const sectionId = window.location.hash.slice(1);
+      const element = document.getElementById(sectionId);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, []);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md shadow-sm">
@@ -17,7 +52,7 @@ export default function Navigation() {
         <div className="flex justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <Link href="/" className="text-2xl font-bold text-gray-900">
+            <Link href="/" onClick={(e) => handleNavClick(e, '/')} className="text-2xl font-bold text-gray-900">
               envai
             </Link>
           </div>
@@ -28,8 +63,9 @@ export default function Navigation() {
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
                 className={`${
-                  pathname === item.href
+                  pathname === item.href || (item.href.includes('#') && pathname === '/')
                     ? 'text-blue-600 font-semibold'
                     : 'text-gray-600 hover:text-gray-900'
                 } transition-colors duration-200`}
@@ -71,9 +107,9 @@ export default function Navigation() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  onClick={() => setIsOpen(false)}
+                  onClick={(e) => handleNavClick(e, item.href)}
                   className={`${
-                    pathname === item.href
+                    pathname === item.href || (item.href.includes('#') && pathname === '/')
                       ? 'bg-blue-50 text-blue-600'
                       : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                   } block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200`}

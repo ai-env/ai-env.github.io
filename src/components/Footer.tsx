@@ -21,17 +21,17 @@ export default function Footer() {
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Hızlı Bağlantılar</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/hizmetler" className="text-gray-600 hover:text-gray-900 transition-colors">
+                <Link href="/#services" className="text-gray-600 hover:text-gray-900 transition-colors">
                   Hizmetler
                 </Link>
               </li>
               <li>
-                <Link href="/hakkimizda" className="text-gray-600 hover:text-gray-900 transition-colors">
+                <Link href="/#about" className="text-gray-600 hover:text-gray-900 transition-colors">
                   Hakkımızda
                 </Link>
               </li>
               <li>
-                <Link href="/iletisim" className="text-gray-600 hover:text-gray-900 transition-colors">
+                <Link href="/#contact" className="text-gray-600 hover:text-gray-900 transition-colors">
                   İletişim
                 </Link>
               </li>
@@ -45,11 +45,6 @@ export default function Footer() {
               <li className="text-gray-600">
                 <a href={`mailto:${CONTACT_INFO.email}`} className="hover:text-gray-900 transition-colors">
                   {CONTACT_INFO.email}
-                </a>
-              </li>
-              <li className="text-gray-600">
-                <a href={`tel:${CONTACT_INFO.phone}`} className="hover:text-gray-900 transition-colors">
-                  {CONTACT_INFO.phone}
                 </a>
               </li>
             </ul>
