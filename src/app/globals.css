@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 255, 255, 255;
 }
 
 @theme inline {
@@ -19,8 +19,25 @@
   }
 }
 
+/* Set background color for the entire document including overscroll area */
+html {
+  background-color: rgb(var(--background-rgb));
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* For Safari overscroll */
+body::before {
+  content: '';
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgb(var(--background-rgb));
+  z-index: -1;
 }
