@@ -6,6 +6,7 @@ Official website for envai - helping local businesses succeed online through dig
 
 This project uses Next.js with TypeScript and is deployed to GitHub Pages.
 
+
 ### Prerequisites
 
 - Node.js v20.9.0
