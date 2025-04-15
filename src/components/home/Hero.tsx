@@ -1,10 +1,32 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const HERO_IMAGES = [
+  '/images/hero.webp',
+  '/images/hero_2.webp',
+  '/images/hero_3.webp',
+];
+
+const TRANSITION_INTERVAL = 5000; // 5 seconds between transitions
 
 export default function Hero() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => 
+        prevIndex === HERO_IMAGES.length - 1 ? 0 : prevIndex + 1
+      );
+    }, TRANSITION_INTERVAL);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="relative isolate overflow-hidden bg-gradient-to-b from-blue-50 to-white">
       {/* Background pattern */}
@@ -65,25 +87,55 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Image */}
+          {/* Image Carousel */}
           <div className="relative w-full max-w-xl lg:max-w-2xl">
             <div className="aspect-[4/3] w-full overflow-hidden rounded-xl bg-gray-900/5 shadow-2xl">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl" />
-              <Image
-                src="/images/hero.webp"
-                alt="Digital business growth illustration"
-                fill
-                priority
-                className="object-cover object-center rounded-xl"
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 640px, 768px"
-                quality={90}
-                onError={(e) => {
-                  const target = e.target as HTMLElement;
-                  target.style.display = 'none';
-                }}
-              />
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentImageIndex}
+                  initial={{ opacity: 0, scale: 1.05 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ 
+                    opacity: { duration: 0.8, ease: "easeInOut" },
+                    scale: { duration: 1, ease: "easeOut" }
+                  }}
+                  className="relative w-full h-full"
+                >
+                  <Image
+                    src={HERO_IMAGES[currentImageIndex]}
+                    alt="Digital business growth illustration"
+                    fill
+                    priority
+                    className="object-cover object-center rounded-xl"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 640px, 768px"
+                    quality={90}
+                    onError={(e) => {
+                      const target = e.target as HTMLElement;
+                      target.style.display = 'none';
+                    }}
+                  />
+                </motion.div>
+              </AnimatePresence>
               {/* Overlay gradient */}
               <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-transparent pointer-events-none" />
+              
+              {/* Image indicators */}
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3">
+                {HERO_IMAGES.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentImageIndex(index)}
+                    className={`w-2 h-2 rounded-full transition-all duration-500 ${
+                      index === currentImageIndex 
+                        ? 'bg-white w-6' 
+                        : 'bg-white/50 hover:bg-white/75'
+                    }`}
+                    aria-label={`Go to image ${index + 1}`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>

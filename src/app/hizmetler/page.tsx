@@ -1,46 +1,68 @@
 'use client';
 
-import { ArrowLeftIcon, CheckIcon } from '@heroicons/react/24/outline';
+import { ArrowLeftIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { SERVICES } from '@/utils/constants';
 
 const PRICING_TIERS = [
   {
-    name: 'Başlangıç',
-    price: '1.499',
-    description: 'Dijital dünyaya ilk adımınız için temel paket',
+    name: 'Temel',
+    price: '4.400',
+    description: 'Kartvizit Web Site - Tek sayfa web sitesi, işletmenizin dijitaldeki kimliğini etkili bir şekilde yansıtır.',
     features: [
-      'Google İşletme Profili Optimizasyonu',
-      'Temel Web Sitesi',
-      'Sosyal Medya Hesap Kurulumu',
-      '1 Ay Ücretsiz Danışmanlık',
+      '1 Sayfa',
+      'Temel Tasarım Özelleştirme',
+      'İçerik Girişi',
+      'Responsive Tasarım',
+      'Kaynak Kodları',
+      '2 Revizyon Hakkı',
+      '3 Gün Teslim Süresi',
+      'Hızlı Teslim: 1 gün (+2000 TL)',
     ],
   },
   {
-    name: 'Profesyonel',
-    price: '2.999',
-    description: 'Büyüyen işletmeler için kapsamlı çözümler',
+    name: 'Standart',
+    price: '8.400',
+    description: 'Kartvizit Web Sitesi - Temel pakete ekstra Hosting ve domain entegrasyonu (Domain Ücreti hariçtir.)',
     features: [
-      'Google İşletme Profili Tam Yönetim',
-      'Özel Tasarım Web Sitesi',
-      '3 Sosyal Medya Platformu Yönetimi',
-      'Google Ads Kampanya Yönetimi',
-      '3 Ay Ücretsiz Danışmanlık',
+      '5 Sayfa',
+      'Gelişmiş Tasarım Özelleştirme',
+      'İçerik Girişi',
+      'Responsive Tasarım',
+      'Kaynak Kodları',
+      '4 Revizyon Hakkı',
+      '6 Gün Teslim Süresi',
+      'Hızlı Teslim: 2 gün (+2400 TL)',
+      'Hosting ve Domain Entegrasyonu',
     ],
   },
   {
-    name: 'Kurumsal',
-    price: 'Özel Fiyat',
-    description: 'Büyük işletmeler için özelleştirilmiş çözümler',
+    name: 'Pro',
+    price: '28.000',
+    description: 'Özel Web Sitesi - Özel ihtiyaçlar ve tasarımlar için tamamen özelleştirilmiş bir çözüm.',
     features: [
-      'Tam Kapsamlı Dijital Varlık Yönetimi',
-      'E-ticaret Web Sitesi',
-      'Tüm Sosyal Medya Platformları',
-      'Google & Meta Ads Yönetimi',
-      'Sürekli Teknik Destek',
-      'Özel Danışmanlık',
+      '20 Sayfa',
+      'Tam Özelleştirilebilir Tasarım',
+      'İçerik Girişi',
+      'Responsive Tasarım',
+      'Kaynak Kodları',
+      '10 Revizyon Hakkı',
+      '12 Gün Teslim Süresi',
+      'Hızlı Teslim: 4 gün (+6500 TL)',
+      'Özel İhtiyaçlara Göre Geliştirme',
     ],
   },
+];
+
+const COMPARISON_TABLE = [
+  { feature: 'Sayfa Sayısı', basic: '1', standard: '5', pro: '20' },
+  { feature: 'Tasarım Özelleştirme', basic: 'Temel', standard: 'Gelişmiş', pro: 'Tam Özelleştirilebilir' },
+  { feature: 'İçerik Girişi', basic: '✓', standard: '✓', pro: '✓' },
+  { feature: 'Responsive Tasarım', basic: '✓', standard: '✓', pro: '✓' },
+  { feature: 'Kaynak Kodları', basic: '✓', standard: '✓', pro: '✓' },
+  { feature: 'Revizyon Hakkı', basic: '2', standard: '4', pro: '10' },
+  { feature: 'Normal Teslim Süresi', basic: '3 gün', standard: '6 gün', pro: '12 gün' },
+  { feature: 'Hızlı Teslim Seçeneği', basic: '1 gün (+2000 TL)', standard: '2 gün (+2400 TL)', pro: '4 gün (+6500 TL)' },
 ];
 
 export default function ServicesPage() {
@@ -93,15 +115,20 @@ export default function ServicesPage() {
 
         {/* Pricing Section */}
         <div className="mt-32">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">
-            Fiyatlandırma
+          <h2 className="text-3xl font-bold text-center text-gray-900">
+            Paketleri Karşılaştırın
           </h2>
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+          <p className="mt-4 text-center text-lg text-gray-600">
+            Hangi paketi seçeceğine karar veremiyorsan freelancer'a hemen danışabilirsin.
+          </p>
+
+          {/* Pricing Cards */}
+          <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-3">
             {PRICING_TIERS.map((tier, index) => (
               <div
                 key={tier.name}
                 className={`bg-white rounded-2xl shadow-xl p-8 ${
-                  index === 1 ? 'ring-2 ring-blue-500 transform lg:-translate-y-4' : ''
+                  index === 2 ? 'ring-2 ring-blue-500 transform lg:-translate-y-4' : ''
                 }`}
               >
                 <h3 className="text-xl font-semibold text-gray-900">{tier.name}</h3>
@@ -120,7 +147,7 @@ export default function ServicesPage() {
                 <Link
                   href="/iletisim"
                   className={`mt-8 block w-full py-3 px-4 rounded-md text-center font-medium ${
-                    index === 1
+                    index === 2
                       ? 'bg-blue-600 text-white hover:bg-blue-700'
                       : 'bg-blue-50 text-blue-600 hover:bg-blue-100'
                   } transition-colors duration-200`}
@@ -129,6 +156,46 @@ export default function ServicesPage() {
                 </Link>
               </div>
             ))}
+          </div>
+
+          {/* Comparison Table */}
+          <div className="mt-20 overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Özellikler
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Temel
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Standart
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Pro
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {COMPARISON_TABLE.map((row, idx) => (
+                  <tr key={idx} className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      {row.feature}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                      {row.basic}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                      {row.standard}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                      {row.pro}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
 

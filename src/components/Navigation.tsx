@@ -52,7 +52,7 @@ export default function Navigation() {
         <div className="flex justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <Link href="/" onClick={(e) => handleNavClick(e, '/')} className="text-2xl font-bold text-gray-900">
+            <Link href="/" onClick={(e) => handleNavClick(e, '/')} className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent hover:from-blue-700 hover:to-blue-900 transition-all duration-300">
               envai
             </Link>
           </div>
