@@ -26,9 +26,9 @@ jobs:
         
       - name: Build project
         run: npm run build
-
-      - name: Copy CNAME file
-        run: cp public/CNAME out/
+        
+      - name: Configure custom domain
+        run: echo "env-ai.com" > out/CNAME
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
