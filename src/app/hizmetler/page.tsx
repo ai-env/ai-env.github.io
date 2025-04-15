@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowLeftIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { ArrowLeftIcon, CheckIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { SERVICES } from '@/utils/constants';
 
@@ -119,7 +119,7 @@ export default function ServicesPage() {
             Paketleri Karşılaştırın
           </h2>
           <p className="mt-4 text-center text-lg text-gray-600">
-            Hangi paketi seçeceğine karar veremiyorsan freelancer'a hemen danışabilirsin.
+            Hangi paketi seçeceğine karar veremiyorsan freelancer&apos;a hemen danışabilirsin.
           </p>
 
           {/* Pricing Cards */}
